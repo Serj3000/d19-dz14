@@ -12,16 +12,6 @@ class CreatePostsTable extends Migration
      * @return void
      */
 
-
-//DZ-14
-// id BIGINT UNSIGNED AUTO_INCREMENT
-// title CHAR 200 NOT NULL
-// description VARCHAR (100) NOT NULL
-// body TEXT NOT NULL
-// created_at TIMESTAMP
-// updated_at TIMESTAMP
-
-
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
@@ -35,7 +25,19 @@ class CreatePostsTable extends Migration
         Schema::table('posts', function ($table) {
             $table->boolean('status')->after('body')->nullable()->default(0);
         });
-        
+
+        Schema::table('posts', function ($table) {
+            $table->string('title', 255)->change();
+            $table->string('description', 255)->nullable()->change();
+        });
+
+        Schema::table('posts', function ($table) {
+            $table->string('slug',255)->after('title')->unique();
+        });
+
+        Schema::table('posts', function ($table) {
+            $table->dropColumn('status');
+        });
     }
 
     /**
