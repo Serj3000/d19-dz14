@@ -38,6 +38,11 @@ class CreatePostsTable extends Migration
         Schema::table('posts', function ($table) {
             $table->dropColumn('status');
         });
+
+        Schema::table('posts', function ($table) {
+            $table->bigInteger('user_id')->unsigned()->after('id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
