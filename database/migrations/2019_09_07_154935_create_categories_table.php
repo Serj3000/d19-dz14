@@ -18,14 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->timestamps();
+        });
 
-// id BIGINT UNSIGNED AUTO_INCREMENT
-// title CHAR 200 NOT NULL
-// description VARCHAR (100) NOT NULL
-// body TEXT NOT NULL
-// created_at TIMESTAMP
-// updated_at TIMESTAMP
-
+        Schema::table('categories', function ($table) {
+            $table->string('email');
         });
     }
 
